@@ -1,5 +1,6 @@
 import React from 'react';
 import Notification from './components/Notification'
+import Filter from './components/Filter'
 import { vote, createAnecdote } from './reducers/anecdoteReducer';
 import { showNotification, hideNotification } from './reducers/notificationReducer'
 
@@ -31,6 +32,8 @@ const AnecdoteList = ({store}) => {
     <>
       <h2>Anecdotes</h2>
       {anecdotes
+        .filter(anecdote =>
+          anecdote.content.toLowerCase().includes(store.getState().filter.toLowerCase()))
         .sort((a, b) => b.votes - a.votes)
         .map(anecdote =>
         <div key={anecdote.id}>
@@ -59,6 +62,7 @@ const App = (props) => {
   return (
     <div>
       <Notification store={store} />
+      <Filter store={store} />
       <AnecdoteList store={store}/>
       <AnecdoteForm store={store} />
     </div>

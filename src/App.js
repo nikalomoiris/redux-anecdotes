@@ -9,19 +9,20 @@ const AnecdoteForm = ({ store }) => {
   }
 
   return (
+    <>
+      <h2>create new</h2>
       <form onSubmit={addAnecdote}>
         <div><input name='anecdote' /></div>
         <button type='submit'>create</button>
       </form>
+    </>
   )
 }
 
-const App = (props) => {
-  const store = props.store
-  const anecdotes = props.store.getState()
-
+const AnecdoteList = ({store}) => {
+  const anecdotes = store.getState()
   return (
-    <div>
+    <>
       <h2>Anecdotes</h2>
       {anecdotes
         .sort((a, b) => b.votes - a.votes)
@@ -36,7 +37,16 @@ const App = (props) => {
           </div>
         </div>
       )}
-      <h2>create new</h2>
+    </>
+  )
+}
+
+const App = (props) => {
+  const store = props.store
+
+  return (
+    <div>
+      <AnecdoteList store={store}/>
       <AnecdoteForm store={store} />
     </div>
   )

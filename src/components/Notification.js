@@ -6,15 +6,15 @@ const Notification = (props) => {
     padding: 10,
     borderWidth: 1
   }
-  if (props.store.getState().notification !== null) {
-    return (
-      <div style={style}>
-        {props.store.getState().notification}
-      </div>
-    )
-  } else {
+  // if (props.store.getState().notification !== null) {
+  //   return (
+  //     <div style={style}>
+  //       {props.store.getState().notification}
+  //     </div>
+  //   )
+  // } else {
     return null
-  }
+  // }
 }
 
 export default Notification

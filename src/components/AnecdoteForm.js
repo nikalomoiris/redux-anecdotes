@@ -2,14 +2,14 @@ import React from 'react'
 import { showNotification, hideNotification } from '../reducers/notificationReducer'
 import { createAnecdote } from '../reducers/anecdoteReducer'
 
-const AnecdoteForm = ({ store }) => {
+const AnecdoteForm = (props) => {
     const addAnecdote = (event) => {
       event.preventDefault()
       const content = event.target.anecdote.value
-      store.dispatch(createAnecdote(content))
-      store.dispatch(showNotification(`you created '${content}'`))
+    //   store.dispatch(createAnecdote(content))
+    //   store.dispatch(showNotification(`you created '${content}'`))
       setTimeout(() => {
-        store.dispatch(hideNotification())
+        // store.dispatch(hideNotification())
       }, 5000)
     }
 

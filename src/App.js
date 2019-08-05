@@ -1,4 +1,5 @@
 import React from 'react';
+import Notification from './components/Notification'
 import { vote, createAnecdote } from './reducers/anecdoteReducer';
 
 const AnecdoteForm = ({ store }) => {
@@ -20,7 +21,7 @@ const AnecdoteForm = ({ store }) => {
 }
 
 const AnecdoteList = ({store}) => {
-  const anecdotes = store.getState()
+  const anecdotes = store.getState().anecdotes
   return (
     <>
       <h2>Anecdotes</h2>
@@ -46,6 +47,7 @@ const App = (props) => {
 
   return (
     <div>
+      <Notification store={store} />
       <AnecdoteList store={store}/>
       <AnecdoteForm store={store} />
     </div>

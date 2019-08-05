@@ -1,5 +1,4 @@
 import React from 'react'
-import { newNotification } from '../reducers/notificationReducer'
 
 const Notification = (props) => {
   const style = {
@@ -7,11 +6,15 @@ const Notification = (props) => {
     padding: 10,
     borderWidth: 1
   }
-  return (
-    <div style={style}>
-      {props.store.getState().notification}
-    </div>
-  )
+  if (props.store.getState().notification !== null) {
+    return (
+      <div style={style}>
+        {props.store.getState().notification}
+      </div>
+    )
+  } else {
+    return null
+  }
 }
 
 export default Notification

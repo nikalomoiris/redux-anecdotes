@@ -1,12 +1,17 @@
 import React from 'react';
 import Notification from './components/Notification'
 import { vote, createAnecdote } from './reducers/anecdoteReducer';
+import { showNotification, hideNotification } from './reducers/notificationReducer'
 
 const AnecdoteForm = ({ store }) => {
   const addAnecdote = (event) => {
     event.preventDefault()
     const content = event.target.anecdote.value
     store.dispatch(createAnecdote(content))
+    store.dispatch(showNotification(`you created '${content}'`))
+    setTimeout(() => {
+      store.dispatch(hideNotification())
+    }, 5000)
   }
 
   return (
@@ -34,7 +39,13 @@ const AnecdoteList = ({store}) => {
           </div>
           <div>
             has {anecdote.votes}
-            <button onClick={() => store.dispatch(vote(anecdote.id))}>vote</button>
+              <button onClick={() => {
+                store.dispatch(vote(anecdote.id))
+                store.dispatch(showNotification(`you voted '${anecdote.content}'`))
+                setTimeout(() => {
+                  store.dispatch(hideNotification())
+                }, 5000)
+              }}>vote</button>
           </div>
         </div>
       )}

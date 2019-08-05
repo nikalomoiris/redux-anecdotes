@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { vote } from '../reducers/anecdoteReducer'
 import { showNotification, hideNotification } from '../reducers/notificationReducer'
-import { statement } from '@babel/template';
 
 const AnecdoteList = (props) => {
     const anecdotes = props.anecdotes
@@ -20,13 +19,13 @@ const AnecdoteList = (props) => {
             </div>
             <div>
               has {anecdote.votes}
-                {/* <button onClick={() => {
-                  store.dispatch(vote(anecdote.id))
-                  store.dispatch(showNotification(`you voted '${anecdote.content}'`))
+                <button onClick={() => {
+                  props.vote(anecdote.id)
+                  props.showNotification(`you voted '${anecdote.content}'`)
                   setTimeout(() => {
-                    store.dispatch(hideNotification())
+                    props.hideNotification()
                   }, 5000)
-                }}>vote</button> */}
+                }}>vote</button>
             </div>
           </div>
         )}
@@ -42,4 +41,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(AnecdoteList)
+const mapDispatchToProps = {
+    hideNotification,
+    showNotification,
+    vote
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AnecdoteList)

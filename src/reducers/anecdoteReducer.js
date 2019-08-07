@@ -26,10 +26,13 @@ export const vote = (id) => {
   }
 }
 
-export const createAnecdote = (content) => {
-  return {
-    type: 'NEW_ANECDOTE',
-    data: content
+export const createAnecdote = content => {
+  return async dispatch => {
+    const newAnecdote = await anecdoteService.createNew(content)
+    dispatch({
+      type: 'NEW_ANECDOTE',
+      data: newAnecdote
+    })
   }
 }
 
@@ -42,8 +45,6 @@ export const initializeAnecdotes = () => {
     })
   }
 }
-
-const initialState = anecdotesAtStart.map(asObject)
 
 const reducer = (state = [], action) => {
   console.log('state now: ', state)
